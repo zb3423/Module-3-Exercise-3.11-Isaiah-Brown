@@ -1,0 +1,67 @@
+import java.util.Scanner;
+
+public class DaysInMonth {
+
+    // Method to check if a year is a leap year
+    public static boolean isLeapYear(int year) {
+        return (year % 4 == 0 && year % 100 != 0) || (year % 400 == 0);
+    }
+
+    // Method to return the number of days in a given month of a given year
+    public static int daysInMonth(int month, int year) {
+        // Days in each month
+        int[] daysInMonths = {
+            0,  // Placeholder for 0 index (no month 0)
+            31, // January
+            28, // February
+            31, // March
+            30, // April
+            31, // May
+            30, // June
+            31, // July
+            31, // August
+            30, // September
+            31, // October
+            30, // November
+            31  // December
+        };
+        
+        // Check if February and adjust for leap year
+        if (month == 2 && isLeapYear(year)) {
+            return 29;
+        }
+        return daysInMonths[month];
+    }
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        
+        // Get user input for month and year
+        System.out.print("Enter the month (1-12): ");
+        int month = scanner.nextInt();
+        
+        System.out.print("Enter the year (e.g., 2020): ");
+        int year = scanner.nextInt();
+
+        // Validate month input
+        if (month < 1 || month > 12) {
+            System.out.println("Invalid month. Please enter a month between 1 and 12.");
+            return;
+        }
+
+        // Get the number of days in the specified month and year
+        int days = daysInMonth(month, year);
+        
+        // Array of month names
+        String[] monthNames = {
+            "", "January", "February", "March", "April", "May", "June",
+            "July", "August", "September", "October", "November", "December"
+        };
+        
+        // Display the result
+        System.out.println(monthNames[month] + " " + year + " had " + days + " days.");
+        
+        // Close the scanner
+        scanner.close();
+    }
+}
